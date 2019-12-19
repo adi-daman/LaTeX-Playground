@@ -1,1 +1,1 @@
-# LaTeX Repository
+# LaTeX Playground Repository
