@@ -1,0 +1,40 @@
+% Credits: https://latex.org/forum/viewtopic.php?t=10815 post number 3
+\documentclass{report}
+\usepackage{hyperref}
+
+% == Start of Custom Label-Ref Counter
+\newcounter{aNewCounter}[subsection] %\setcounter{aNewCounter}{0}
+
+\renewcommand{\theaNewCounter}{\thesubsection.\arabic{aNewCounter}}
+
+\newenvironment{aNewCounterEnvironment}[1]%
+{
+	\refstepcounter{aNewCounter}
+	\par\noindent\textbf{A New Counter: \theaNewCounter} \label{anewcounter: #1}
+}
+
+\begin{document}
+	\chapter{One}
+	\section{Section 1}
+	\subsection{Sub-Section 1}
+	Link to \ref{anewcounter: chapter-2-section-2-subsection-2-1}
+	\aNewCounterEnvironment{section-1-subsection-1-1}
+	\newpage
+	\subsection{Sub-Section 2}
+	\aNewCounterEnvironment{section-1-subsection-2-1}
+	\newpage
+	
+	\section{Section 2}
+	\subsection{Sub-Section 1}
+	\aNewCounterEnvironment{section-2-subsection-1-1}
+	\subsection{Sub-Section 2}
+	\newpage
+	\chapter{Two}
+	\aNewCounterEnvironment{section-0-subsection-0-1}
+	\section{Section 1}
+	Link to \ref{anewcounter: section-1-subsection-1-1} \\
+	Link to \ref{anewcounter: section-1-subsection-2-1}
+	\section{Section 2}
+	\subsection{Sub-Section 1}
+	\aNewCounterEnvironment{chapter-2-section-2-subsection-2-1}
+\end{document}
