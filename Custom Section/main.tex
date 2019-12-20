@@ -1,0 +1,44 @@
+\documentclass{report}
+
+\usepackage[dvipsnames]{xcolor} % not necessary but used in example
+\usepackage{titlesec}
+
+\newcounter{exampleSection}[subsection]
+\titleclass{\exampleSection}{straight}[\part]
+
+% Start of Example Section
+% https://tex.stackexchange.com/a/394117
+\titleformat{\exampleSection}[hang]
+{\normalfont\LARGE\bfseries}{\theexampleSection}{1em}{}
+\titlespacing*{\exampleSection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3 ex plus .2ex}
+\renewcommand{\theexampleSection}{\thesubsection.\arabic{exampleSection}}
+%\counterwithin{subsection}{exampleSection}
+
+\newcommand{\myexampleSection}[1]{\exampleSection{\parbox[t]{\textwidth}{\textcolor{NavyBlue}{\textbf{#1}}}}}
+\titleformat{\exampleSection}
+{\normalsize\bfseries}
+{\normalsize\hspace{-105pt}\parbox[t]{105pt}{\colorbox{NavyBlue}{\makebox[95pt][l]{\color{white}Example \theexampleSection}}}}
+{0pt}
+{}
+% End of Example Section
+
+% Start of Example Section without numbering 
+% https://tex.stackexchange.com/a/394117 & https://tex.stackexchange.com/a/102120
+\titleformat{name=\exampleSection,numberless}[hang]
+{\normalfont\normalsize\bfseries}{\theexampleSection}{1em}{}
+\titlespacing*{\exampleSection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3 ex plus .2ex}
+\renewcommand{\theexampleSection}{\thesubsection.\arabic{exampleSection}}
+
+\newcommand{\myexampleSectionNumberless}[1]{\refstepcounter{exampleSection}\exampleSection*{\parbox[t]{\textwidth}{\textcolor{NavyBlue}{\textbf{#1}}}}} %remove \refstepcounter{exampleSection} for counter to be 0 forever
+\titleformat{name=\exampleSection,numberless}
+{\normalsize\bfseries}
+{\normalsize\hspace{-105pt}\parbox[t]{105pt}{\colorbox{NavyBlue}{\makebox[95pt][l]{\color{white}Example \theexampleSection}}}}
+{0pt}
+{}
+% End of Example Section without numbering
+
+
+\begin{document}
+	\myexampleSection{Foo}
+	\myexampleSectionNumberless{Bar}
+\end{document}
